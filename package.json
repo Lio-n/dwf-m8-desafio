@@ -1,0 +1,33 @@
+{
+  "name": "desafio_8",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack",
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "live-server"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "live-server": "^1.2.1",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@types/react": "^17.0.40",
+    "css-loader": "^6.7.1",
+    "mapbox-gl": "^2.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-dropzone": "^12.0.5",
+    "react-map-gl": "^7.0.10",
+    "react-mapbox-gl": "^5.1.1",
+    "react-router-dom": "^6.2.2",
+    "recoil": "^0.6.1",
+    "style-loader": "^3.3.1",
+    "svg-url-loader": "^7.1.1",
+    "tsconfig-paths-webpack-plugin": "^3.5.2"
+  }
+}

@@ -1,0 +1,10 @@
+.map_container {
+  height: 400px;
+  margin-bottom: 2rem;
+}
+
+.search__input,
+.search__btn {
+  padding: 1rem;
+  font-size: 20px;
+}

@@ -1,0 +1,11 @@
+.root {
+  background-color: crimson;
+  margin: 0 auto;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5rem;
+}
+
+.root h1 {
+  color: cornflowerblue;
+}
