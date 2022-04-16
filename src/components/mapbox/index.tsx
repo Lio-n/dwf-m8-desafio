@@ -17,6 +17,7 @@ export function Mapbox(props: MapBoxSearchProps) {
   const { onChange } = props;
   const [query, setQuery] = useState("");
   const [result, setResult] = useState(null);
+  const [popupInfo, setPopupInfo] = useState(null);
 
   // lo seteo any porque la prop "center" de Map se queja
   const initialCoords: any = [-4.486109177517903, 48.399989097932604];
@@ -28,6 +29,8 @@ export function Mapbox(props: MapBoxSearchProps) {
       item.newCoords = [parseFloat(item.lon), parseFloat(item.lat)];
       return item;
     });
+
+    setPopupInfo({ coords: newResults[0].newCoords, city_name: newResults[0].display_name });
 
     setResult(newResults);
 
@@ -84,8 +87,18 @@ export function Mapbox(props: MapBoxSearchProps) {
         zoom={[15]}
         center={coords}
         movingMethod="easeTo"
-      />
-      <Popup coordinates={coords} />
+      >
+        {popupInfo && (
+          <Marker anchor="top" coordinates={popupInfo.coords}>
+            <h2>Marker</h2>
+          </Marker>
+        )}
+
+        <Popup anchor="top" coordinates={coords}>
+          <h1>POPUP</h1>
+        </Popup>
+      </Map>
     </div>
   );
 }
+// {popupInfo && <Popup anchor="top" coordinates={popupInfo.coords}></Popup>}

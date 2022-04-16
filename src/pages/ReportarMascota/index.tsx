@@ -1,7 +1,7 @@
 import React from "react";
 import { MainTextField, MyDropzone } from "components";
 import { CardLayer, MainButton, RadioInput, TextSpan, TextTitle } from "ui";
-import { Mapbox } from "components/mapbox";
+import { Mapbox } from "components/mapbox/react-map";
 import css from "./index.css";
 
 function ReportarMascota() {
