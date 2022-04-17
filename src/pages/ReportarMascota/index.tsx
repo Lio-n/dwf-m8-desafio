@@ -1,7 +1,7 @@
 import React from "react";
-import { MainTextField, MyDropzone } from "components";
+import { CustomMap, MainTextField, MyDropzone } from "components";
 import { CardLayer, MainButton, RadioInput, TextSpan, TextTitle } from "ui";
-import { Mapbox } from "components/mapbox/react-map";
+import { Mapbox } from "components/mapbox";
 import css from "./index.css";
 
 function ReportarMascota() {
@@ -10,6 +10,10 @@ function ReportarMascota() {
     const formData: any = new FormData(e.target);
     const dataObject = Object.fromEntries(formData);
     console.log("🚀 ~ file: index.tsx ~ line 10 ~ handleSubmit ~ dataObject", dataObject);
+  };
+
+  const handleMapboxChange = (e) => {
+    console.log(e);
   };
 
   return (
@@ -44,7 +48,7 @@ function ReportarMascota() {
             margin="0 0 1.25rem 0"
           />
           <MyDropzone />
-          <Mapbox />
+          <Mapbox onChange={handleMapboxChange} />
           <MainButton>Enviar</MainButton>
         </form>
       </CardLayer>
