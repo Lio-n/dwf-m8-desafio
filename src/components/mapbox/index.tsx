@@ -1,11 +1,12 @@
 // * Este Custom MapBox solo se utiliza para buscar una ubicacion
 // * setear un markador, en esa ubicacion y devolver las coords
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { searchQuery } from "lib/apis";
 import { CustomMap } from "ui/map";
 import { Marker } from "react-map-gl";
 import css from "./index.css";
+import { TextSpan } from "ui";
 
 type MapBoxSearchProps = {
   coords;
@@ -35,7 +36,9 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
   const [coords, setCoords] = useState(initialCoords);
 
   const search = async () => {
+    if (!query) return;
     const data = await searchQuery(query);
+    if (!data) return;
     const newResults = data.map((item) => {
       item.newCoords = [parseFloat(item.lon), parseFloat(item.lat)];
       return item;
@@ -44,6 +47,9 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
     setResult(newResults);
   };
 
+  useEffect(() => {
+    if (query.length > 3) search();
+  }, [query]);
   const inputChangeHandler = (e) => setQuery(e.target.value);
   const keydownInputHandler = (e) => e.key == "Enter" && search();
 
@@ -53,8 +59,29 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
     setResult(null); // Esto es para que se borre el historial
   };
 
+  const renderSuggestions = () =>
+    result.map((item) => {
+      return (
+        <li className={css.list__item} key={item.place_id} onClick={() => resultHandler(item)}>
+          {item.display_name}
+        </li>
+      );
+    });
+
+  const renderInfo = () => {
+    return (
+      <div className={css.root__info}>
+        <TextSpan fontStyle="italic" color="var(--Muted-Blue)">
+          Buscá un punto de referencia para reportar a tu mascota.
+        </TextSpan>
+        <TextSpan fontStyle="italic" color="var(--Muted-Blue)">
+          Puede ser una dirección, un barrio o una ciudad.
+        </TextSpan>
+      </div>
+    );
+  };
   return (
-    <>
+    <section className={css.root}>
       <div className={css.search}>
         <input
           className={css.search__input}
@@ -62,24 +89,10 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
           onChange={inputChangeHandler}
           onKeyDown={keydownInputHandler}
         />
-        <button className={css.search__btn} onClick={search}>
-          Buscar
-        </button>
-
-        <ul className={css.search__list}>
-          {result &&
-            result.map((item) => (
-              <li
-                className={css.list__item}
-                key={item.place_id}
-                onClick={() => resultHandler(item)}
-              >
-                {item.display_name}
-              </li>
-            ))}
-        </ul>
+        {result && <ul className={css.search__list}>{renderSuggestions()}</ul>}
       </div>
       <CustomMap coords={coords}>{marker}</CustomMap>
-    </>
+      {renderInfo()}
+    </section>
   );
 }

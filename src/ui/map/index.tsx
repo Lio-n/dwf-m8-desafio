@@ -26,7 +26,7 @@ export function CustomMap({ children, coords }: CustomMap) {
         bearing: 0,
         pitch: 0,
       }}
-      style={{ width: "20rem", height: "20rem" }}
+      style={{ height: "22rem", minHeight: "10rem", borderRadius: 4 }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       mapboxAccessToken={TOKEN}
     >

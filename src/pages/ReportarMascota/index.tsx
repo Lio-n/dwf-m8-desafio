@@ -47,9 +47,12 @@ function ReportarMascota() {
             type="date"
             margin="0 0 1.25rem 0"
           />
-          <MyDropzone />
+          <MyDropzone style={{ marginBottom: "1.25rem" }} />
           <Mapbox onChange={handleMapboxChange} />
-          <MainButton>Enviar</MainButton>
+          <MainButton>Reportar como perdido</MainButton>
+          <MainButton backgroundColor={"var(--Glacier)"} margin={"1.5rem 0 0 0"}>
+            Cancelar
+          </MainButton>
         </form>
       </CardLayer>
     </section>

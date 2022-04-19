@@ -5,7 +5,7 @@ const add_icon: string = require("assets/add_icon.svg");
 const modify_icon: string = require("assets/modify_icon.svg");
 
 // Este componente se encarga de guardad la URL de la img en el atom pets.
-export function MyDropzone() {
+export function MyDropzone({ style }: { style? }) {
   const [imgURL, setImgURL] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -20,7 +20,7 @@ export function MyDropzone() {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <section className={css.root}>
+    <section className={css.root} style={style}>
       <div {...getRootProps()}>
         <input {...getInputProps()} style={{ padding: "2rem", display: "none" }} />
         <div className={css.picture}>

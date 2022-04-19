@@ -1,28 +1,73 @@
-import {
-  searchQueryMapboxAPI,
-  checkUserEmailAPI,
-  getTokenAPI,
-  TokenApiParams,
-  TokenApiPromise,
-  updateUserAPI,
-  UpdateUserParams,
-  CreateUserApiParams,
-  createUserApi,
-} from "./api";
+// ## ヾ(●ω●)ノ ##
 
-const searchQuery = (query: string): Promise<any[]> => searchQueryMapboxAPI(query);
+const API_BASE_URL = "https://dwf-m7-looking-for-my-friend.herokuapp.com";
 
-const checkUser = ({ email }: { email: string }): Promise<boolean> => checkUserEmailAPI({ email });
+// # search Autocomplete
+const searchQueryMapboxAPI = async (query: string): Promise<any[]> => {
+  return await (
+    await fetch(
+      `https://api.locationiq.com/v1/autocomplete.php?key=pk.a61fe8582c7d74a674c2b16f444cf686&q=${query}&limit=3`
+    )
+  ).json();
+};
 
-const createUser = ({ email, full_name, password }: CreateUserApiParams): Promise<void> =>
-  createUserApi({ email, full_name, password });
+// # Check If User Exists.
+const checkUserEmailAPI = async ({ email }: { email: string }): Promise<boolean> => {
+  return await (await fetch(`${API_BASE_URL}/exists/${email}`)).json();
+};
 
-const authUser = ({ email, password }: TokenApiParams): Promise<TokenApiPromise> =>
-  getTokenAPI({ email, password });
+type CreateUserApiParams = { email: string; full_name: string; password: string };
+// # Creater User.
+const createUserApi = async ({
+  email,
+  full_name,
+  password,
+}: CreateUserApiParams): Promise<void> => {
+  await fetch(`${API_BASE_URL}/auth`, {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ email, full_name, password }),
+  });
+};
+
+type TokenApiParams = { email: string; password: string };
+type TokenApiPromise = { token: string; full_name: string };
+// # Auth User : Return TOKEN
+const getTokenAPI = async ({ email, password }: TokenApiParams): Promise<TokenApiPromise> => {
+  const res = await (
+    await fetch(`${API_BASE_URL}/auth/token`, {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+  ).json();
+
+  return { token: res.isToken, full_name: res.full_name };
+};
 
 // ! Below here you need a TOKEN
 
-const updateUser = ({ full_name, token, password }: UpdateUserParams): void =>
-  updateUserAPI({ full_name, token, password });
+type UpdateUserParams = { full_name: string; token: string; password: string };
+// # Update User.
+const updateUserAPI = ({ full_name, token, password }: UpdateUserParams): void => {
+  fetch(`${API_BASE_URL}/user/update`, {
+    method: "put",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `bearer ${token}`,
+    },
+    body: JSON.stringify({ full_name, password }),
+  });
+};
 
-export { searchQuery, checkUser, createUser, authUser, updateUser };
+export {
+  searchQueryMapboxAPI as searchQuery,
+  checkUserEmailAPI as checkUser,
+  getTokenAPI as authUser,
+  updateUserAPI as updateUser,
+  createUserApi as createUser,
+};
