@@ -64,10 +64,38 @@ const updateUserAPI = ({ full_name, token, password }: UpdateUserParams): void =
   });
 };
 
+type Pet = {
+  full_name: string;
+  pictureUrl: string;
+  breed: string;
+  color: string;
+  sex: string;
+  date_last_seen: string;
+  last_location_lat: number;
+  last_location_lng: number;
+};
+type publishPetParams = {
+  pet: Pet;
+  token: string;
+};
+// # Publish Pet
+const publishPetAPI = async ({ pet, token }: publishPetParams): Promise<void> => {
+  await fetch(`${API_BASE_URL}/pet/publish`, {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+      "Access-Control-Allow-Origin": " *",
+      Authorization: `bearer ${token}`,
+    },
+    body: JSON.stringify(pet),
+  });
+};
+
 export {
   searchQueryMapboxAPI as searchQuery,
   checkUserEmailAPI as checkUser,
   getTokenAPI as authUser,
   updateUserAPI as updateUser,
   createUserApi as createUser,
+  publishPetAPI as publishPet,
 };

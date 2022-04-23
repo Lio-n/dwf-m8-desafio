@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import css from "./index.css";
 const add_icon: string = require("assets/add_icon.svg");
 const modify_icon: string = require("assets/modify_icon.svg");
 
-// Este componente se encarga de guardad la URL de la img en el atom pets.
-export function MyDropzone({ style }: { style? }) {
+// Este componente se encarga de guardar la URL de la img en el atom pets.
+export function MyDropzone({ style, onChange }: { style?; onChange: (any) => any }) {
   const [imgURL, setImgURL] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -18,6 +18,10 @@ export function MyDropzone({ style }: { style? }) {
     };
   }, []);
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  useEffect(() => {
+    if (imgURL) onChange({ pictureUrl: imgURL });
+  }, [imgURL]);
 
   return (
     <section className={css.root} style={style}>

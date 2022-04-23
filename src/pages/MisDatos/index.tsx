@@ -50,9 +50,9 @@ export function MisDatos() {
       }
     }
     setEmpty({
-      full_name: !!full_name ? true : false,
-      password: !!password ? true : false,
-      password_2: !!password_2 ? true : false,
+      full_name: !!full_name,
+      password: !!password,
+      password_2: !!password_2,
     });
   };
 

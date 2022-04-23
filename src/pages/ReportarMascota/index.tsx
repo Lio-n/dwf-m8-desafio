@@ -1,20 +1,74 @@
-import React from "react";
-import { CustomMap, MainTextField, MyDropzone } from "components";
-import { CardLayer, MainButton, RadioInput, TextSpan, TextTitle } from "ui";
-import { Mapbox } from "components/mapbox";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGetToken } from "hooks";
+import { MainTextField, MyDropzone, Mapbox } from "components";
+import { AlertError, CardLayer, MainButton, RadioInput, TextSpan, TextTitle } from "ui";
 import css from "./index.css";
+import { publishPet } from "lib/apis";
+
+const checkInputs = (pet): boolean => {
+  const arrValues = Object.values(pet);
+  if (!arrValues.includes("" || undefined)) return true;
+  return;
+};
 
 function ReportarMascota() {
+  const [pet, setPet] = useState({
+    full_name: undefined,
+    pictureUrl: undefined,
+    breed: undefined,
+    color: undefined,
+    sex: undefined,
+    date_last_seen: undefined,
+    last_location_lat: undefined,
+    last_location_lng: undefined,
+  });
+  const [submit, setSubmit] = useState(false);
+  const navegate = useNavigate();
+  const token = useGetToken();
+  // Change the BorderColor of the custom input.
+  const [isEmpty, setEmpty] = useState({
+    full_name: true,
+    breed: true,
+    color: true,
+    date_last_seen: true,
+    pictureUrl: true,
+    coords: true,
+  });
+
+  useEffect(() => {
+    if (!token) navegate("/");
+    // * Cada vez que haga un submit desde el form, ejecuto esta funcion.
+    currentData();
+  }, [submit]);
+
+  const currentData = async () => {
+    if (checkInputs(pet)) {
+      // * Llamada a la API
+      await publishPet({ pet, token });
+      navegate("/mis-mascotas");
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData: any = new FormData(e.target);
     const dataObject = Object.fromEntries(formData);
-    console.log("🚀 ~ file: index.tsx ~ line 10 ~ handleSubmit ~ dataObject", dataObject);
+
+    setPet({ ...pet, ...dataObject });
+    setEmpty({
+      full_name: !!dataObject.full_name,
+      breed: !!dataObject.breed,
+      color: !!dataObject.color,
+      date_last_seen: !!dataObject.date_last_seen,
+      coords: !!pet.last_location_lat,
+      pictureUrl: !!pet.pictureUrl,
+    });
+    setSubmit(!submit);
   };
 
-  const handleMapboxChange = (e) => {
-    console.log(e);
-  };
+  const handleMapboxChange = ({ coords }) =>
+    setPet({ ...pet, last_location_lng: coords[0], last_location_lat: coords[1] });
+  const handleDropzoneChange = ({ pictureUrl }) => setPet({ ...pet, pictureUrl });
 
   return (
     <section className={css.root}>
@@ -26,13 +80,21 @@ function ReportarMascota() {
             title="Nombre"
             placeholder="Boomer"
             margin="0 0 1.25rem 0"
+            isEmpty={isEmpty.full_name}
           />
-          <MainTextField name="breed" title="Raza" placeholder="Tamaskan" margin="0 0 1.25rem 0" />
+          <MainTextField
+            name="breed"
+            title="Raza"
+            placeholder="Tamaskan"
+            margin="0 0 1.25rem 0"
+            isEmpty={isEmpty.breed}
+          />
           <MainTextField
             name="color"
             title="Color"
             placeholder="Gris, negro y blanco"
             margin="0 0 1.25rem 0"
+            isEmpty={isEmpty.color}
           />
           <div className={css.form__radio}>
             <TextSpan>Sexo</TextSpan>
@@ -46,9 +108,22 @@ function ReportarMascota() {
             title="Visto por última vez"
             type="date"
             margin="0 0 1.25rem 0"
+            isEmpty={isEmpty.date_last_seen}
           />
-          <MyDropzone style={{ marginBottom: "1.25rem" }} />
+          <MyDropzone onChange={handleDropzoneChange} style={{ marginBottom: "1.25rem" }} />
+          {!isEmpty.pictureUrl && (
+            <AlertError
+              message="Por favor, añade una foto."
+              AlertStyle={{ fontStyle: "italic", fontWeight: 600, marginBottom: "1.25rem" }}
+            />
+          )}
           <Mapbox onChange={handleMapboxChange} />
+          {!isEmpty.coords && (
+            <AlertError
+              message="Por favor, añade una ubicación."
+              AlertStyle={{ fontStyle: "italic", fontWeight: 600, marginBottom: "1.25rem" }}
+            />
+          )}
           <MainButton>Reportar como perdido</MainButton>
           <MainButton backgroundColor={"var(--Glacier)"} margin={"1.5rem 0 0 0"}>
             Cancelar

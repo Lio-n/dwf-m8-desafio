@@ -15,10 +15,9 @@ type MapBoxSearchProps = {
 
 // Este Custom se encarga de 'retornar' las coords. Al form
 const CustomMarker = ({ coords, onChange }: MapBoxSearchProps) => {
-  onChange({ coords: "Start" });
   return (
     <Marker
-      onDragEnd={({ lngLat }) => onChange({ coords: "End" })}
+      onDragEnd={({ lngLat }) => onChange({ coords: [lngLat.lng, lngLat.lat] })}
       draggable
       latitude={coords[1]}
       longitude={coords[0]}
@@ -37,32 +36,34 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
 
   const search = async () => {
     if (!query) return;
-    const data = await searchQuery(query);
+    const data: any[] = await searchQuery(query);
     if (!data) return;
     const newResults = data.map((item) => {
       item.newCoords = [parseFloat(item.lon), parseFloat(item.lat)];
       return item;
     });
-
     setResult(newResults);
   };
 
   useEffect(() => {
     if (query.length > 3) search();
   }, [query]);
+
   const inputChangeHandler = (e) => setQuery(e.target.value);
   const keydownInputHandler = (e) => e.key == "Enter" && search();
 
   const resultHandler = (item) => {
+    onChange({ coords: item.newCoords });
+
     setMarker(<CustomMarker coords={item.newCoords} onChange={onChange} />);
     setCoords(item.newCoords);
     setResult(null); // Esto es para que se borre el historial
   };
 
   const renderSuggestions = () =>
-    result.map((item) => {
+    result.map((item, index) => {
       return (
-        <li className={css.list__item} key={item.place_id} onClick={() => resultHandler(item)}>
+        <li className={css.list__item} key={index} onClick={() => resultHandler(item)}>
           {item.display_name}
         </li>
       );
