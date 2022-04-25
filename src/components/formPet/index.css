@@ -1,0 +1,9 @@
+.form__radio {
+  margin: 0 0 1.25rem 0;
+}
+
+.radio__inputs {
+  display: flex;
+  padding-left: 1rem;
+  gap: 1rem;
+}

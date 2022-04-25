@@ -1,0 +1,45 @@
+.card {
+  /* box-model */
+  width: 20rem;
+  margin-bottom: 3rem;
+  max-height: 24.5rem;
+  padding: 0.5rem;
+  /* visual */
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px #d5d1d1;
+}
+.pet {
+  position: relative;
+}
+.pet__layer {
+  /* box model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: pointer;
+  /* visual */
+  border-radius: 5px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.pet:hover .pet__layer {
+  opacity: 1;
+}
+.pet:hover .pet__picture {
+  filter: blur(1px);
+}
+.pet__full_name {
+  margin: 0.5rem 0 0 0.5rem;
+}
+.pet__picture {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
+  height: 20rem;
+  display: block;
+}
