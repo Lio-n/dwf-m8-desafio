@@ -7,13 +7,14 @@ import { CustomMap } from "ui/map";
 import { Marker } from "react-map-gl";
 import css from "./index.css";
 import { TextSpan } from "ui";
+import { useGetPet } from "hooks";
 
 type MapBoxSearchProps = {
   coords;
   onChange: (any) => any;
 };
 
-// Este Custom se encarga de 'retornar' las coords. Al form
+// * Este Custom se encarga de 'retornar' las coords. Al form.
 const CustomMarker = ({ coords, onChange }: MapBoxSearchProps) => {
   return (
     <Marker
@@ -29,10 +30,16 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
   const [marker, setMarker] = useState(null);
   const [query, setQuery] = useState("");
   const [result, setResult] = useState(null);
+  const { last_location_lat, last_location_lng } = useGetPet(); // * 1
 
   // lo seteo any porque la prop "center" de Map se queja
   const initialCoords: any = [-4.486109177517903, 48.399989097932604];
-  const [coords, setCoords] = useState(initialCoords);
+  const petCoords: any = [last_location_lng, last_location_lat]; // * 2
+  const [coords, setCoords] = useState(petCoords || initialCoords);
+
+  useEffect(() => {
+    if (last_location_lat) setMarker(<CustomMarker coords={petCoords} onChange={onChange} />); // * 3
+  }, []);
 
   const search = async () => {
     if (!query) return;
@@ -53,6 +60,7 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
   const keydownInputHandler = (e) => e.key == "Enter" && search();
 
   const resultHandler = (item) => {
+    setMarker(null); // * 4
     onChange({ coords: item.newCoords });
 
     setMarker(<CustomMarker coords={item.newCoords} onChange={onChange} />);

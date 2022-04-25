@@ -23,6 +23,7 @@ export default function MainInput({
       name={name}
       className={css.main__input}
       type={type}
+      max={type == "date" ? new Date().toLocaleDateString("en-ca") : ""}
       placeholder={placeholder}
       defaultValue={defaultValue}
     />

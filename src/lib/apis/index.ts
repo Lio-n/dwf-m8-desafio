@@ -91,6 +91,40 @@ const publishPetAPI = async ({ pet, token }: publishPetParams): Promise<void> =>
   });
 };
 
+type getPetsPromise = {
+  full_name: string;
+  id: number;
+  pictureUrl: string;
+};
+
+// # User's Pets
+const getPetsAPI = async (token: string): Promise<getPetsPromise[]> => {
+  return await (
+    await fetch(`${API_BASE_URL}/pet/published-by`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+        Authorization: `bearer ${token}`,
+      },
+    })
+  ).json();
+};
+
+// # Get One Pet
+const getOnePetAPI = async ({ id, token }: { id: number; token: string }) => {
+  return await (
+    await fetch(`${API_BASE_URL}/pet/${id}`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+        Authorization: `bearer ${token}`,
+      },
+    })
+  ).json();
+};
+
 export {
   searchQueryMapboxAPI as searchQuery,
   checkUserEmailAPI as checkUser,
@@ -98,4 +132,6 @@ export {
   updateUserAPI as updateUser,
   createUserApi as createUser,
   publishPetAPI as publishPet,
+  getPetsAPI as getPets,
+  getOnePetAPI as getOnePet,
 };

@@ -20,8 +20,8 @@ export function CustomMap({ children, coords }: CustomMap) {
     <Map
       ref={(e) => setMapRef(e)}
       initialViewState={{
-        latitude: -4.486109177517903,
-        longitude: 48.399989097932604,
+        latitude: coords[1] || -4.486109177517903,
+        longitude: coords[0] || 48.399989097932604,
         zoom: 3.5,
         bearing: 0,
         pitch: 0,

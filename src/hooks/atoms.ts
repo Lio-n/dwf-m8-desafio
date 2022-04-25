@@ -1,6 +1,4 @@
-import { useUser } from "hooks";
-import { getTokenAPI } from "lib/apis/api";
-import { atom, selector, selectorFamily } from "recoil";
+import { atom, selector } from "recoil";
 
 export const userState = atom({
   key: "user",
@@ -34,6 +32,33 @@ export const emailSelector = selector({
     set(userState, {
       ...get(userState),
       email: newValue,
+    });
+  },
+});
+
+export const petState = atom({
+  key: "pet",
+  default: {
+    full_name: undefined,
+    pictureUrl: undefined,
+    breed: undefined,
+    color: undefined,
+    sex: undefined,
+    date_last_seen: undefined,
+    last_location_lat: undefined,
+    last_location_lng: undefined,
+  },
+});
+
+export const petSelector = selector({
+  key: "petSelector",
+  get: ({ get }) => {
+    return get(petState);
+  },
+  set: ({ set, get }, newPet: Pet) => {
+    set(petState, {
+      ...get(petState),
+      ...newPet,
     });
   },
 });

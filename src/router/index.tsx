@@ -29,7 +29,8 @@ function AppRoutes() {
 
         <Route path="mis-datos" element={<MisDatos />} />
 
-        <Route path="mis-mascotas" element={<MisMascotas />}>
+        <Route path="mis-mascotas">
+          <Route index element={<MisMascotas />} />
           <Route path="editar" element={<EditarReporte />} />
         </Route>
 

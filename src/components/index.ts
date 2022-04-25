@@ -1,10 +1,12 @@
-import { MyHeader } from "./MyHeader";
-import { MyMenu } from "./MyMenu";
-import { MenuItem } from "./MenuItem";
+import { MyHeader } from "./myHeader";
+import { MyMenu } from "./myMenu";
+import { MenuItem } from "./menuItem";
 import { Layout } from "./Layout";
-import { MyDropzone } from "./my-dropzone";
+import { MyDropzone } from "./myDropzone";
 import { CustomMap } from "ui/map";
 import { Mapbox } from "./mapbox";
+import { MyPet } from "./myPet";
+import { FormPet } from "./formPet";
 import MainTextField, { PasswordTextField } from "./textField";
 
 export {
@@ -15,6 +17,8 @@ export {
   Layout,
   CustomMap,
   Mapbox,
+  MyPet,
+  FormPet,
   MainTextField,
   PasswordTextField,
 };

@@ -5,12 +5,14 @@ type MainButtonProps = {
   children: string;
   backgroundColor?: string;
   margin?: string;
+  onClick?: () => any;
 };
 
 export default function MainButton({
   children,
   margin = "0",
   backgroundColor = "var(--Muted-Blue)",
+  onClick,
 }: MainButtonProps) {
   const style: CSSProperties = {
     backgroundColor,
@@ -35,6 +37,7 @@ export default function MainButton({
     <button
       className={css.root}
       style={changeColors}
+      onClick={onClick ? () => onClick() : () => {}}
       onMouseEnter={() => changeColor(true)}
       onMouseLeave={() => changeColor(false)}
     >
