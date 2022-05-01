@@ -36,6 +36,8 @@ export const emailSelector = selector({
   },
 });
 
+// * Aca guardo la Mascota que voy a editar.
+// * No la que estoy por publicar/crear.
 export const petState = atom({
   key: "pet",
   default: {
@@ -47,6 +49,11 @@ export const petState = atom({
     date_last_seen: undefined,
     last_location_lat: undefined,
     last_location_lng: undefined,
+    createdAt: undefined,
+    updatedAt: undefined,
+    id: undefined,
+    published_by: undefined,
+    state: undefined,
   },
 });
 
@@ -55,7 +62,7 @@ export const petSelector = selector({
   get: ({ get }) => {
     return get(petState);
   },
-  set: ({ set, get }, newPet: Pet) => {
+  set: ({ set, get }, newPet: PetToUpdate) => {
     set(petState, {
       ...get(petState),
       ...newPet,

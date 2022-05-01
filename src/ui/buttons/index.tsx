@@ -5,6 +5,7 @@ type MainButtonProps = {
   children: string;
   backgroundColor?: string;
   margin?: string;
+  name?: string;
   onClick?: () => any;
 };
 

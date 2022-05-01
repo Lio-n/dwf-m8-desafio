@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FormPet } from "components";
-import { CardLayer, MainButton, TextTitle } from "ui";
+import { AlertWait, CardLayer, MainButton, TextTitle } from "ui";
 
 function ReportarMascota() {
   const navegate = useNavigate();
@@ -10,7 +10,7 @@ function ReportarMascota() {
     <section style={{ padding: "0 1rem 2rem" }}>
       <TextTitle>Reportar Mascota Perdida</TextTitle>
       <CardLayer>
-        <FormPet>
+        <FormPet addAlert={<AlertWait message="Publicando Reporte..." />}>
           <MainButton>Reportar como perdido</MainButton>
           <MainButton
             backgroundColor={"var(--Glacier)"}

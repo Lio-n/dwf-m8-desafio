@@ -1,32 +1,35 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CardLayer, MainButton, TextTitle } from "ui";
+import { deletePet } from "lib/apis";
+import { useGetPet, useGetToken } from "hooks";
 import { FormPet } from "components";
+import { AlertWait, CardLayer, MainButton, TextTitle } from "ui";
 import css from "./index.css";
 
-function EditarReporte() {
+export function EditarReporte() {
   const navegate = useNavigate();
+  const token = useGetToken();
+  const { id } = useGetPet();
+
+  const handleDeletePet = async () => {
+    console.table({ message: "Pet Deleted, Navegate to '/mis-mascotas'" });
+    await deletePet({ petId: id, token });
+    navegate("/mis-mascotas");
+  };
 
   return (
     <section className={css.root}>
       <TextTitle>Editar Reporte</TextTitle>
       <CardLayer>
-        <FormPet>
+        <FormPet addAlert={<AlertWait message="Actualizando Reporte..." />}>
           <MainButton backgroundColor="var(--Caribbean-Green)">Guardar</MainButton>
-          <MainButton
-            backgroundColor={"var(--Rubber-Ducky-Yellow)"}
-            margin={"1.5rem 0"}
-            onClick={() => navegate("/mis-mascotas")}
-          >
-            Reportar como encontrado
-          </MainButton>
-          <div className={css.delete}>
-            <a className={css.delete__report}>Borrar Reporte</a>
-          </div>
         </FormPet>
+        <div className={css.delete}>
+          <a className={css.delete__report} onClick={handleDeletePet}>
+            Borrar Reporte
+          </a>
+        </div>
       </CardLayer>
     </section>
   );
 }
-
-export { EditarReporte };

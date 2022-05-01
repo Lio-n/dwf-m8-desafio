@@ -25,6 +25,8 @@ function MisMascotas() {
       date_last_seen: undefined,
       last_location_lat: undefined,
       last_location_lng: undefined,
+      id: undefined,
+      state: undefined,
     });
   }, []);
 

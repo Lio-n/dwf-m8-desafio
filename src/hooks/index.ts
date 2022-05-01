@@ -15,5 +15,6 @@ export const useGetEmail = () => useRecoilValue(emailSelector);
 export const useSetEmail = () => useSetRecoilState(emailSelector);
 
 // # PET
+export const usePet = () => useRecoilState(petSelector);
 export const useGetPet = () => useRecoilValue(petSelector);
 export const useSetPet = () => useSetRecoilState(petSelector);

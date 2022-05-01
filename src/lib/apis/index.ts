@@ -64,7 +64,7 @@ const updateUserAPI = ({ full_name, token, password }: UpdateUserParams): void =
   });
 };
 
-type Pet = {
+type PetToPublish = {
   full_name: string;
   pictureUrl: string;
   breed: string;
@@ -74,12 +74,12 @@ type Pet = {
   last_location_lat: number;
   last_location_lng: number;
 };
-type publishPetParams = {
-  pet: Pet;
+type PublishPetParams = {
+  pet: PetToPublish;
   token: string;
 };
 // # Publish Pet
-const publishPetAPI = async ({ pet, token }: publishPetParams): Promise<void> => {
+const publishPetAPI = async ({ pet, token }: PublishPetParams): Promise<void> => {
   await fetch(`${API_BASE_URL}/pet/publish`, {
     method: "post",
     headers: {
@@ -91,14 +91,14 @@ const publishPetAPI = async ({ pet, token }: publishPetParams): Promise<void> =>
   });
 };
 
-type getPetsPromise = {
+type GetPetsPromise = {
   full_name: string;
   id: number;
   pictureUrl: string;
 };
 
 // # User's Pets
-const getPetsAPI = async (token: string): Promise<getPetsPromise[]> => {
+const getPetsAPI = async (token: string): Promise<GetPetsPromise[]> => {
   return await (
     await fetch(`${API_BASE_URL}/pet/published-by`, {
       method: "get",
@@ -125,6 +125,35 @@ const getOnePetAPI = async ({ id, token }: { id: number; token: string }) => {
   ).json();
 };
 
+type UpdatePetParams = {
+  pet: PetToUpdate;
+  token: string;
+};
+// # Update One Pet
+const updatePetAPI = async ({ pet, token }: UpdatePetParams): Promise<void> => {
+  await fetch(`${API_BASE_URL}/pet/${pet.id}/update`, {
+    method: "put",
+    headers: {
+      "content-type": "application/json",
+      "Access-Control-Allow-Origin": " *",
+      Authorization: `bearer ${token}`,
+    },
+    body: JSON.stringify(pet),
+  });
+};
+
+// # Delete One Pet
+const deletePetAPI = async ({ petId, token }: { petId: number; token: string }): Promise<void> => {
+  await fetch(`${API_BASE_URL}/pet/${petId}/delete`, {
+    method: "delete",
+    headers: {
+      "content-type": "application/json",
+      "Access-Control-Allow-Origin": " *",
+      Authorization: `bearer ${token}`,
+    },
+  });
+};
+
 export {
   searchQueryMapboxAPI as searchQuery,
   checkUserEmailAPI as checkUser,
@@ -134,4 +163,6 @@ export {
   publishPetAPI as publishPet,
   getPetsAPI as getPets,
   getOnePetAPI as getOnePet,
+  updatePetAPI as updatePet,
+  deletePetAPI as deletePet,
 };
