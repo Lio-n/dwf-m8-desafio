@@ -1,10 +1,6 @@
 .root {
   position: relative;
 }
-/* Esto es para quitar el logo de mapboxgl [.mapboxgl-control-container]*/
-.root div div:nth-child(3) {
-  display: none;
-}
 
 .search {
   position: absolute;

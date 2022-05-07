@@ -35,20 +35,18 @@ export function Login() {
   };
 
   return (
-    <section>
-      <CardLayer type="log">
-        <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1rem" }}>
-          <MainTextField
-            name="email"
-            title="Email"
-            placeholder="john.doe@example.com..."
-            isEmpty={isEmpty}
-          >
-            {customAlert}
-          </MainTextField>
-          <MainButton backgroundColor="var(--Muted-Blue)">Ingresar</MainButton>
-        </form>
-      </CardLayer>
-    </section>
+    <CardLayer type="log">
+      <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1rem" }}>
+        <MainTextField
+          name="email"
+          title="Email"
+          placeholder="john.doe@example.com..."
+          isEmpty={isEmpty}
+        >
+          {customAlert}
+        </MainTextField>
+        <MainButton backgroundColor="var(--Muted-Blue)">Ingresar</MainButton>
+      </form>
+    </CardLayer>
   );
 }

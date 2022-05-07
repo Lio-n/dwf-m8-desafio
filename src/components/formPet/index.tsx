@@ -156,7 +156,7 @@ export function FormPet({ children, addAlert }) {
         />
       )}
 
-      {<span style={{ margin: ".5rem 0", display: "block" }}>{customAlert}</span>}
+      {customAlert && <span style={{ margin: ".5rem 0", display: "block" }}>{customAlert}</span>}
       {children}
       {petToEdit.id && (
         <MainButton

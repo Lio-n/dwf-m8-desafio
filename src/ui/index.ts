@@ -5,6 +5,9 @@ import { Logo } from "./logo";
 import MainInput, { RadioInput } from "./inputs";
 import { AlertError, AlertWait } from "./alerts";
 import { TextTitle, TextSubTitle, TextSpan } from "./text";
+import { CustomMarker } from "./marker";
+import { CustomPopup } from "./popup";
+import { PopupLayer } from "./popupLayer";
 
 export {
   MainInput,
@@ -19,4 +22,7 @@ export {
   TextTitle,
   TextSubTitle,
   TextSpan,
+  CustomMarker,
+  CustomPopup,
+  PopupLayer,
 };

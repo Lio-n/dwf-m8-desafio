@@ -154,6 +154,30 @@ const deletePetAPI = async ({ petId, token }: { petId: number; token: string }):
   });
 };
 
+const getAllPetsAPI = async (): Promise<object[]> => {
+  return await (
+    await fetch(`${API_BASE_URL}/pet`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+      },
+    })
+  ).json();
+};
+
+const getPetsNearbyAPI = async (lat, lng): Promise<object> => {
+  return await (
+    await fetch(`${API_BASE_URL}/pets-nearby?lat=${lat}&lng=${lng}`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+      },
+    })
+  ).json();
+};
+
 export {
   searchQueryMapboxAPI as searchQuery,
   checkUserEmailAPI as checkUser,
@@ -165,4 +189,6 @@ export {
   getOnePetAPI as getOnePet,
   updatePetAPI as updatePet,
   deletePetAPI as deletePet,
+  getAllPetsAPI as getAllPets,
+  getPetsNearbyAPI as getPetsNearby,
 };

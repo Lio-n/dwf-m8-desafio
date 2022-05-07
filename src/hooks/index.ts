@@ -1,5 +1,11 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { emailSelector, petSelector, tokenSelector, userState } from "hooks/atoms";
+import {
+  currentCoordsSelector,
+  emailSelector,
+  petSelector,
+  tokenSelector,
+  userState,
+} from "hooks/atoms";
 
 // $ User STATE
 export const useUser = () => useRecoilState(userState);
@@ -18,3 +24,8 @@ export const useSetEmail = () => useSetRecoilState(emailSelector);
 export const usePet = () => useRecoilState(petSelector);
 export const useGetPet = () => useRecoilValue(petSelector);
 export const useSetPet = () => useSetRecoilState(petSelector);
+
+// # CURRENT COORDS
+export const useCurrentCoords = () => useRecoilState(currentCoordsSelector);
+export const useGetCurrentCoords = () => useRecoilValue(currentCoordsSelector);
+export const useSetCurrentCoords = () => useSetRecoilState(currentCoordsSelector);

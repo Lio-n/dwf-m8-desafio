@@ -9,9 +9,6 @@ export const tokenSelector = selector({
   key: "tokenSelector",
   get: async ({ get }) => {
     const { token } = get(userState);
-
-    if (!!token) {
-    }
     return token;
   },
   set: ({ set, get }, newValue: string) => {
@@ -66,6 +63,24 @@ export const petSelector = selector({
     set(petState, {
       ...get(petState),
       ...newPet,
+    });
+  },
+});
+
+export const currentCoords = atom({
+  key: "currentCoords",
+  default: { lng: undefined, lat: undefined },
+});
+
+export const currentCoordsSelector = selector({
+  key: "currentCoordsSelector",
+  get: ({ get }) => {
+    return get(currentCoords);
+  },
+  set: ({ set, get }, newCoords: { lng: number; lat: number }) => {
+    set(currentCoords, {
+      ...get(currentCoords),
+      ...newCoords,
     });
   },
 });

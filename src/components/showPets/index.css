@@ -1,0 +1,11 @@
+.pet__marker {
+  position: absolute;
+  left: -25px;
+  top: -20px;
+}
+
+.pet__picture {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+}

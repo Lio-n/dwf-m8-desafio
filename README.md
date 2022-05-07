@@ -3,47 +3,45 @@
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="login" element={<Login />}>
-          <Route path="/password" element={<Password />} />
+
+        <Route path="login">
+          <Route index element={<Login />} />
+          <Route path="password" element={<Password />} />
         </Route>
+
         <Route path="mis-datos" element={<MisDatos />} />
-        <Route path="mis-mascotas" element={<MisMascotas />}>
-          <Route path="/editar" element={<EditarReporte />} />
+
+        <Route path="mis-mascotas">
+          <Route index element={<MisMascotas />} />
+          <Route path="editar" element={<EditarReporte />} />
         </Route>
+
         <Route path="reportar" element={<ReportarMascota />} />
       </Route>
     </Routes>
 
-## Crear en ui
+## Falta
 
-yarn add @types/node
+### Añadir
 
-- /logo
-  Solo se lo utilizara para el logo de la page(favicon).
-  <Logo />
+#### El Mapa a la page 'Home'
 
-- /icon
-  Recibira el nombre del icon(usar type = {nombres..})
-  <Icon nombre="add">
+- Guardar info en el localstorage, Que info voy a guardar?
 
-  actions = {
-  add
-  medify
-  update
-  }
+- Darle funcionalidad al botton 'Cerrar Sesion'
 
-### Input
+### A la Carpeta ui or component
 
-- Type
-  - "text"
-  - "password"
-  - "password"
-    - Icon eye
-      - eye_closed
-      - eye_open
+- CustomMarker y CustomPopup (?)
 
-## component
+## Move
 
-### mapbox
+- ui/map to component/map
+- component/showPets/CustomPopup to ui/CustomPopup
 
--
+# Useful resources
+
+https://mariestarck.com/how-to-display-popups-on-a-mapbox-map-mapbox-react-tutorial-part-3/
+https://morioh.com/p/b23b78c2e88e
+https://stackoverflow.com/questions/68783312/show-popup-for-only-one-marker-react-map-gl
+https://visgl.github.io/react-map-gl/docs/api-reference/popup

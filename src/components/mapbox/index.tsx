@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { searchQuery } from "lib/apis";
-import { CustomMap } from "ui/map";
+import { CustomMap } from "components";
 import { Marker } from "react-map-gl";
 import css from "./index.css";
 import { TextSpan } from "ui";

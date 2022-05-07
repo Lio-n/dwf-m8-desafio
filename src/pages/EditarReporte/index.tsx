@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePet } from "lib/apis";
 import { useGetPet, useGetToken } from "hooks";
@@ -8,11 +8,12 @@ import css from "./index.css";
 
 export function EditarReporte() {
   const navegate = useNavigate();
+  const [customAlert, setCustomAlert] = useState(undefined);
   const token = useGetToken();
   const { id } = useGetPet();
 
   const handleDeletePet = async () => {
-    console.table({ message: "Pet Deleted, Navegate to '/mis-mascotas'" });
+    setCustomAlert(<AlertWait message="Borrando Reporte..." />);
     await deletePet({ petId: id, token });
     navegate("/mis-mascotas");
   };
@@ -24,6 +25,9 @@ export function EditarReporte() {
         <FormPet addAlert={<AlertWait message="Actualizando Reporte..." />}>
           <MainButton backgroundColor="var(--Caribbean-Green)">Guardar</MainButton>
         </FormPet>
+        {customAlert && (
+          <span style={{ margin: " 0 0 .5rem 0", display: "block" }}>{customAlert}</span>
+        )}
         <div className={css.delete}>
           <a className={css.delete__report} onClick={handleDeletePet}>
             Borrar Reporte

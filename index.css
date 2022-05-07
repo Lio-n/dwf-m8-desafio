@@ -1,0 +1,8 @@
+/* Set width to PopupLayer  */
+.mapboxgl-map .mapboxgl-popup-content {
+  width: 16rem;
+}
+/* Remove mapboxgl logo [.mapboxgl-control-container]*/
+.mapboxgl-map .mapboxgl-control-container {
+  display: none;
+}

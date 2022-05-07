@@ -27,4 +27,5 @@ declare type PetToUpdate = {
   last_location_lng: number;
   id: number;
   state: "lost" | "found";
+  map?: (any) => any;
 };

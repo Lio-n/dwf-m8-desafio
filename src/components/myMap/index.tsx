@@ -1,3 +1,4 @@
+import { useGetCurrentCoords } from "hooks";
 import React, { useEffect, useState } from "react";
 import Map from "react-map-gl";
 
@@ -7,10 +8,16 @@ const TOKEN =
 type CustomMap = {
   children?;
   coords?: number[];
+  height?: string | number;
 };
 
-export function CustomMap({ children, coords }: CustomMap) {
+export function CustomMap({ children, coords, height = "22rem" }: CustomMap) {
   const [mapRef, setMapRef] = useState(null);
+  const currCoords = useGetCurrentCoords();
+
+  useEffect(() => {
+    mapRef && mapRef.flyTo({ center: [currCoords.lng, currCoords.lat] });
+  }, [currCoords]);
 
   useEffect(() => {
     mapRef && mapRef.flyTo({ center: coords });
@@ -20,13 +27,19 @@ export function CustomMap({ children, coords }: CustomMap) {
     <Map
       ref={(e) => setMapRef(e)}
       initialViewState={{
-        latitude: coords[1] || -4.486109177517903,
-        longitude: coords[0] || 48.399989097932604,
+        latitude: 0,
+        longitude: 0,
         zoom: 3.5,
         bearing: 0,
         pitch: 0,
       }}
-      style={{ height: "22rem", minHeight: "10rem", borderRadius: 4 }}
+      style={{
+        height,
+        minHeight: "10rem",
+        maxHeight: "35rem",
+        maxWidth: "90vw",
+        borderRadius: 4,
+      }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       mapboxAccessToken={TOKEN}
     >

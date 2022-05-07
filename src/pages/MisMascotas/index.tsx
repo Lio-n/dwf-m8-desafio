@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MyPet } from "components";
 import { useGetToken, useSetPet } from "hooks";
 import { getOnePet, getPets } from "lib/apis";
-import { TextTitle } from "ui";
+import { TextSubTitle, TextTitle } from "ui";
 import css from "./index.css";
 
 function MisMascotas() {
@@ -53,7 +53,12 @@ function MisMascotas() {
 
   return (
     <section className={css.root}>
-      <TextTitle margin="2.5rem 0 0 0">Mis Mascotas Reportadas</TextTitle>
+      <TextTitle margin="2.5rem 0 0 0">
+        {Array.isArray(pets) && !pets.length
+          ? "No hay Mascotas Reportadas"
+          : "Mis Mascotas Reportadas"}
+      </TextTitle>
+
       {pets && <ul className={css.list}>{renderPets()}</ul>}
     </section>
   );
