@@ -1,6 +1,14 @@
+body {
+  background-color: var(--Soft-Peach);
+}
+.mapboxgl-map {
+  font: initial;
+}
 /* Set width to PopupLayer  */
 .mapboxgl-map .mapboxgl-popup-content {
   width: 16rem;
+  padding: 10px;
+  border-radius: 5px;
 }
 /* Remove mapboxgl logo [.mapboxgl-control-container]*/
 .mapboxgl-map .mapboxgl-control-container {

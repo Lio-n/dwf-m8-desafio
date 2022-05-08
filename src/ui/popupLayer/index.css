@@ -1,10 +1,3 @@
-span {
-  display: block;
-}
-p,
-span {
-  margin: 0;
-}
 .card__picture .picture__thumbnail {
   display: block;
   border-radius: 5px;
@@ -39,11 +32,11 @@ span {
 .card__picture:hover .picture__layer {
   opacity: 1;
 }
-.picture__layer p {
+.picture__layer p,
+.picture__layer span {
   color: #fff;
+  margin: 0;
 }
 .picture__layer span {
-  font-weight: bold;
   display: inline;
-  color: #fff;
 }

@@ -24,20 +24,9 @@
 
 ### Añadir
 
-#### El Mapa a la page 'Home'
-
 - Guardar info en el localstorage, Que info voy a guardar?
 
 - Darle funcionalidad al botton 'Cerrar Sesion'
-
-### A la Carpeta ui or component
-
-- CustomMarker y CustomPopup (?)
-
-## Move
-
-- ui/map to component/map
-- component/showPets/CustomPopup to ui/CustomPopup
 
 # Useful resources
 

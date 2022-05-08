@@ -9,6 +9,7 @@ type InputProps = {
   isEmpty?: boolean;
   children?;
   defaultValue?: string;
+  height?: string;
   margin?: string;
   onChange?: (params: string) => any;
 };
@@ -21,13 +22,15 @@ export default function MainTextField({
   type = "text",
   children,
   defaultValue,
-  margin,
+  height = "2.8rem",
+  margin = "0 0 1.25rem 0",
 }: InputProps) {
   return (
     <label style={{ margin, display: "block" }}>
       {title && <TextSpan>{title}</TextSpan>}
       <MainInput
         isEmpty={isEmpty}
+        height={height}
         name={name}
         type={type}
         placeholder={placeholder}
@@ -51,18 +54,16 @@ export function PasswordTextField({
   const handleChange = () => (type == "text" ? true : false);
 
   return (
-    <>
-      <label>
-        {title && <TextSpan>{title}</TextSpan>}
-        <label style={{ position: "relative" }}>
-          <MainInput isEmpty={isEmpty} name={name} type={type} placeholder={placeholder} />
-          <IconEye
-            type={handleChange()}
-            onEvent={() => (handleChange() ? onChange("password") : onChange("text"))}
-          />
-        </label>
-        {children}
+    <label style={{ display: "block", marginBottom: "1.25rem" }}>
+      {title && <TextSpan>{title}</TextSpan>}
+      <label style={{ position: "relative" }}>
+        <MainInput isEmpty={isEmpty} name={name} type={type} placeholder={placeholder} />
+        <IconEye
+          type={handleChange()}
+          onEvent={() => (handleChange() ? onChange("password") : onChange("text"))}
+        />
       </label>
-    </>
+      {children}
+    </label>
   );
 }

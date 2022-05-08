@@ -96,7 +96,6 @@ export function FormPet({ children, addAlert }) {
         name="full_name"
         title="Nombre"
         placeholder="Boomer"
-        margin="0 0 1.25rem 0"
         defaultValue={petToEdit.full_name || ""}
         isEmpty={isEmpty.full_name}
       />
@@ -104,7 +103,6 @@ export function FormPet({ children, addAlert }) {
         name="breed"
         title="Raza"
         placeholder="Tamaskan"
-        margin="0 0 1.25rem 0"
         defaultValue={petToEdit.breed || ""}
         isEmpty={isEmpty.breed}
       />
@@ -112,7 +110,6 @@ export function FormPet({ children, addAlert }) {
         name="color"
         title="Color"
         placeholder="Gris, negro y blanco"
-        margin="0 0 1.25rem 0"
         defaultValue={petToEdit.color || ""}
         isEmpty={isEmpty.color}
       />
@@ -137,7 +134,6 @@ export function FormPet({ children, addAlert }) {
         name="date_last_seen"
         title="Visto por última vez"
         type="date"
-        margin="0 0 1.25rem 0"
         defaultValue={(petToEdit.date_last_seen && setDateOfPet()) || ""}
         isEmpty={isEmpty.date_last_seen}
       />

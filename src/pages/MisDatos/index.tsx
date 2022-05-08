@@ -64,7 +64,7 @@ export function MisDatos() {
         ) : (
           <TextSubTitle>Crear Usuario</TextSubTitle>
         )}
-        <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1rem" }}>
+        <form onSubmit={(event) => handleSubmit(event)}>
           <MainTextField
             name="full_name"
             title="Usuario"

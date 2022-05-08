@@ -49,6 +49,44 @@ const getTokenAPI = async ({ email, password }: TokenApiParams): Promise<TokenAp
   return { token: res.isToken, full_name: res.full_name };
 };
 
+// # Send Report.
+const sendReportAPI = async (report_data: ReportSighting): Promise<boolean> => {
+  return await (
+    await fetch(`${API_BASE_URL}/report/pet`, {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+      },
+      body: JSON.stringify(report_data),
+    })
+  ).json();
+};
+
+const getAllPetsAPI = async (): Promise<object[]> => {
+  return await (
+    await fetch(`${API_BASE_URL}/pet`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+      },
+    })
+  ).json();
+};
+
+const getPetsNearbyAPI = async ({ lat, lng }: { lat: number; lng: number }): Promise<object[]> => {
+  return await (
+    await fetch(`${API_BASE_URL}/pets-nearby?lat=${lat}&lng=${lng}`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": " *",
+      },
+    })
+  ).json();
+};
+
 // ! Below here you need a TOKEN
 
 type UpdateUserParams = { full_name: string; token: string; password: string };
@@ -154,30 +192,6 @@ const deletePetAPI = async ({ petId, token }: { petId: number; token: string }):
   });
 };
 
-const getAllPetsAPI = async (): Promise<object[]> => {
-  return await (
-    await fetch(`${API_BASE_URL}/pet`, {
-      method: "get",
-      headers: {
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin": " *",
-      },
-    })
-  ).json();
-};
-
-const getPetsNearbyAPI = async (lat, lng): Promise<object> => {
-  return await (
-    await fetch(`${API_BASE_URL}/pets-nearby?lat=${lat}&lng=${lng}`, {
-      method: "get",
-      headers: {
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin": " *",
-      },
-    })
-  ).json();
-};
-
 export {
   searchQueryMapboxAPI as searchQuery,
   checkUserEmailAPI as checkUser,
@@ -191,4 +205,5 @@ export {
   deletePetAPI as deletePet,
   getAllPetsAPI as getAllPets,
   getPetsNearbyAPI as getPetsNearby,
+  sendReportAPI as sendReport,
 };

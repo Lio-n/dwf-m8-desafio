@@ -3,6 +3,7 @@ import css from "./index.css";
 
 type InputProps = {
   name: string;
+  height?: string;
   type?: string;
   isEmpty?: boolean;
   placeholder?: string;
@@ -16,10 +17,11 @@ export default function MainInput({
   placeholder,
   type = "text",
   defaultValue,
+  height = "2.8rem",
 }: InputProps) {
   return (
     <input
-      style={{ borderColor: isEmpty ? "" : "var(--Amaranth)" }}
+      style={{ borderColor: isEmpty ? "" : "var(--Amaranth)", height }}
       name={name}
       className={css.main__input}
       type={type}

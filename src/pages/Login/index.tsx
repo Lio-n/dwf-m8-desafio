@@ -36,7 +36,7 @@ export function Login() {
 
   return (
     <CardLayer type="log">
-      <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1rem" }}>
+      <form onSubmit={(event) => handleSubmit(event)}>
         <MainTextField
           name="email"
           title="Email"

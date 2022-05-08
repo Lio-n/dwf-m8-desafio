@@ -2,19 +2,14 @@ import React from "react";
 import { Popup } from "react-map-gl";
 
 type CustomPopupProps = {
-  pet: Pet;
+  coords: number[];
   closePopup: (any) => any;
   children;
 };
 
-export function CustomPopup({ pet, closePopup, children }: CustomPopupProps) {
+export function CustomPopup({ coords, closePopup, children }: CustomPopupProps) {
   return (
-    <Popup
-      latitude={pet.last_location_lat}
-      longitude={pet.last_location_lng}
-      onClose={() => closePopup(null)}
-      offset={25}
-    >
+    <Popup latitude={coords[0]} longitude={coords[1]} onClose={() => closePopup(null)} offset={25}>
       {children}
     </Popup>
   );

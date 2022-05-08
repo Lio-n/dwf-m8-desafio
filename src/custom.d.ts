@@ -29,3 +29,12 @@ declare type PetToUpdate = {
   state: "lost" | "found";
   map?: (any) => any;
 };
+
+declare type ReportSighting = {
+  full_name: string;
+  phone_number: string;
+  message: string;
+  pet_id: number;
+  published_by: number;
+  pet_name: string;
+};

@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import { CustomMap, FormReportSighting } from "components";
 import { useGetCurrentCoords } from "hooks";
 import { getAllPets, getPetsNearby } from "lib/apis";
-import { CustomPopup, CustomMarker, PopupLayer } from "ui";
+import { CustomMarker, PopupLayer } from "ui";
 import css from "./index.css";
 
 export function ShowPets() {
   const currCoords = useGetCurrentCoords();
   const [pets, setPets] = useState(undefined);
   const [popupInfo, setPopupInfo] = useState(null);
+  const [enableForm, setEnableForm] = useState(false);
 
   useEffect(() => {
     !!currCoords.lng && getPetsNear();
   }, [currCoords]);
 
   const getPetsNear = async () => {
-    const resPets = await getPetsNearby(currCoords.lat, currCoords.lng);
+    const resPets = await getPetsNearby({ lat: currCoords.lat, lng: currCoords.lng });
     setPets({ resPets, areNearby: true });
   };
 
@@ -46,9 +47,22 @@ export function ShowPets() {
         {pets && renderPetsMarker()}
         {!pets?.areNearby && popupInfo && <PopupLayer pet={popupInfo} onClick={setPopupInfo} />}
         {pets?.areNearby && popupInfo && (
-          <CustomPopup pet={popupInfo} closePopup={setPopupInfo}>
-            <FormReportSighting pet={popupInfo} />
-          </CustomPopup>
+          <PopupLayer type="report" pet={popupInfo} onClick={setPopupInfo}>
+            {!enableForm && (
+              <div className={css.report}>
+                <a className={css.pet__report} onClick={() => setEnableForm(true)}>
+                  Reportar
+                </a>
+              </div>
+            )}
+            {enableForm && (
+              <FormReportSighting
+                pet_id={popupInfo.id}
+                published_by={popupInfo.published_by}
+                pet_name={popupInfo.full_name}
+              />
+            )}
+          </PopupLayer>
         )}
       </CustomMap>
     </div>

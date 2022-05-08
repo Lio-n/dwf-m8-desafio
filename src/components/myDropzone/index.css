@@ -20,6 +20,7 @@
 .thumbnail__pet {
   display: block;
   border-radius: 5px;
+  object-fit: cover;
   max-width: 20rem;
   min-width: 6rem;
   max-height: 21rem;

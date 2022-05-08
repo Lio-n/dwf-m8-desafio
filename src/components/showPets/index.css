@@ -9,3 +9,19 @@
   height: 3rem;
   border-radius: 100%;
 }
+
+.report {
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.pet__report {
+  cursor: pointer;
+  color: var(--Amaranth);
+  font-weight: bold;
+  font-size: 1rem;
+}
+.pet__report:hover {
+  text-decoration: underline;
+}
