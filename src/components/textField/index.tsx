@@ -23,7 +23,7 @@ export default function MainTextField({
   children,
   defaultValue,
   height = "2.8rem",
-  margin = "0 0 1.25rem 0",
+  margin,
 }: InputProps) {
   return (
     <label style={{ margin, display: "block" }}>
@@ -54,7 +54,7 @@ export function PasswordTextField({
   const handleChange = () => (type == "text" ? true : false);
 
   return (
-    <label style={{ display: "block", marginBottom: "1.25rem" }}>
+    <label>
       {title && <TextSpan>{title}</TextSpan>}
       <label style={{ position: "relative" }}>
         <MainInput isEmpty={isEmpty} name={name} type={type} placeholder={placeholder} />

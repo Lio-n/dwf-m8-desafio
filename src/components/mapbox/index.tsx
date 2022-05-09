@@ -2,12 +2,12 @@
 // * setear un markador, en esa ubicacion y devolver las coords
 
 import React, { useEffect, useState } from "react";
+import { useGetPet } from "hooks";
+import { Marker } from "react-map-gl";
 import { searchQuery } from "lib/apis";
 import { CustomMap } from "components";
-import { Marker } from "react-map-gl";
-import css from "./index.css";
 import { TextSpan } from "ui";
-import { useGetPet } from "hooks";
+import css from "./index.css";
 
 type MapBoxSearchProps = {
   coords;
@@ -39,7 +39,8 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
 
   useEffect(() => {
     if (last_location_lat) setMarker(<CustomMarker coords={petCoords} onChange={onChange} />); // * 3
-  }, []);
+    if (!last_location_lat && marker) setMarker(null);
+  }, [last_location_lat]);
 
   const search = async () => {
     if (!query) return;
@@ -65,7 +66,7 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
 
     setMarker(<CustomMarker coords={item.newCoords} onChange={onChange} />);
     setCoords(item.newCoords);
-    setResult(null); // Esto es para que se borre el historial
+    setResult(null); // Esto es para que se "borre" el historial
   };
 
   const renderSuggestions = () =>

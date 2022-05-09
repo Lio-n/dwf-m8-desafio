@@ -10,11 +10,11 @@ export function EditarReporte() {
   const navegate = useNavigate();
   const [customAlert, setCustomAlert] = useState(undefined);
   const token = useGetToken();
-  const { id } = useGetPet();
+  const petToEdit = useGetPet();
 
   const handleDeletePet = async () => {
     setCustomAlert(<AlertWait message="Borrando Reporte..." />);
-    await deletePet({ petId: id, token });
+    await deletePet({ petId: petToEdit.id, token });
     navegate("/mis-mascotas");
   };
 
@@ -22,17 +22,15 @@ export function EditarReporte() {
     <section className={css.root}>
       <TextTitle>Editar Reporte</TextTitle>
       <CardLayer>
-        <FormPet addAlert={<AlertWait message="Actualizando Reporte..." />}>
+        <FormPet addAlert={<AlertWait message="Actualizando Reporte..." />} petToEdit={petToEdit}>
           <MainButton backgroundColor="var(--Caribbean-Green)">Guardar</MainButton>
+          <div className={css.delete}>
+            {customAlert}
+            <a className={css.delete__report} onClick={handleDeletePet}>
+              Borrar Reporte
+            </a>
+          </div>
         </FormPet>
-        {customAlert && (
-          <span style={{ margin: " 0 0 .5rem 0", display: "block" }}>{customAlert}</span>
-        )}
-        <div className={css.delete}>
-          <a className={css.delete__report} onClick={handleDeletePet}>
-            Borrar Reporte
-          </a>
-        </div>
       </CardLayer>
     </section>
   );

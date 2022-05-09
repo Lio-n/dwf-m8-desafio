@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AlertError, AlertWait, MainButton, TextSpan } from "ui";
 import { MainTextField } from "components";
 import { sendReport } from "lib/apis";
-import css from "./index.css";
 import { AlertSuccess } from "ui/alerts";
+import css from "./index.css";
 
 const checkInputs = (report_data: ReportSighting): boolean => {
   const arrValues = Object.values(report_data);
@@ -60,18 +60,19 @@ export function FormReportSighting({ pet_id, published_by, pet_name }: FormRepor
   };
 
   const currentData = async () => {
-    if (checkInputs(report)) {
-      if (isEmpty.phone_number) {
-        await sendReport(report);
-        setCustomAlert(<AlertSuccess message="¡Reportado con Exito!" />);
-      }
+    if (checkInputs(report) && isEmpty.phone_number) {
+      await sendReport(report);
+      setCustomAlert(<AlertSuccess message="¡Reportado con Exito!" />);
     } else {
       setCustomAlert(undefined);
     }
   };
 
   return (
-    <form style={{ marginTop: "0.5rem" }} onSubmit={(event) => handleSubmit(event)}>
+    <form
+      style={{ marginTop: "0.5rem", display: "grid", gap: "1.25rem" }}
+      onSubmit={(event) => handleSubmit(event)}
+    >
       <MainTextField
         name="full_name"
         title="Tu Nombre"
@@ -88,10 +89,7 @@ export function FormReportSighting({ pet_id, published_by, pet_name }: FormRepor
         isEmpty={isEmpty.phone_number}
       />
       {!isEmpty.phone_number && (
-        <AlertError
-          message="Por favor ingrese un número de teléfono válido"
-          AlertStyle={{ fontStyle: "italic", fontWeight: 600 }}
-        />
+        <AlertError message="Por favor, ingrese un número de teléfono válido" />
       )}
       <label>
         <TextSpan>Dondé lo viste?</TextSpan>

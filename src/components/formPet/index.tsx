@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetPet, useGetToken } from "hooks";
+import { useGetToken } from "hooks";
 import { MainTextField, MyDropzone, Mapbox } from "components";
 import { AlertError, MainButton, RadioInput, TextSpan } from "ui";
 import { publishPet, updatePet } from "lib/apis";
@@ -12,10 +12,27 @@ const checkInputs = (pet: Pet): boolean => {
   return;
 };
 
-export function FormPet({ children, addAlert }) {
-  const [customAlert, setCustomAlert] = useState(undefined);
+type FormPetProps = {
+  children;
+  addAlert;
+  petToEdit?: Pet;
+};
 
-  const petToEdit = useGetPet(); // * 1
+const defaultPet = {
+  full_name: undefined,
+  pictureUrl: undefined,
+  breed: undefined,
+  color: undefined,
+  sex: undefined,
+  date_last_seen: undefined,
+  last_location_lat: undefined,
+  last_location_lng: undefined,
+  id: undefined,
+  state: undefined,
+};
+
+export function FormPet({ children, addAlert, petToEdit = defaultPet }: FormPetProps) {
+  const [customAlert, setCustomAlert] = useState(undefined);
 
   const [pet, setPet] = useState({
     full_name: undefined,
@@ -91,7 +108,7 @@ export function FormPet({ children, addAlert }) {
   const changeStateOfPet = () => setPet({ ...pet, state: pet.state == "lost" ? "found" : "lost" });
 
   return (
-    <form onSubmit={(event) => handleSubmit(event)}>
+    <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1.25rem" }}>
       <MainTextField
         name="full_name"
         title="Nombre"
@@ -137,32 +154,18 @@ export function FormPet({ children, addAlert }) {
         defaultValue={(petToEdit.date_last_seen && setDateOfPet()) || ""}
         isEmpty={isEmpty.date_last_seen}
       />
-      <MyDropzone onChange={handleDropzoneChange} style={{ marginBottom: "1.25rem" }} />
-      {!isEmpty.pictureUrl && (
-        <AlertError
-          message="Por favor, añade una foto."
-          AlertStyle={{ fontStyle: "italic", fontWeight: 600, marginBottom: "1.25rem" }}
-        />
-      )}
+      <MyDropzone onChange={handleDropzoneChange} />
+      {!isEmpty.pictureUrl && <AlertError message="Por favor, añade una foto." />}
       <Mapbox onChange={handleMapboxChange} />
-      {!isEmpty.coords && (
-        <AlertError
-          message="Por favor, añade una ubicación."
-          AlertStyle={{ fontStyle: "italic", fontWeight: 600, marginBottom: "1.25rem" }}
-        />
-      )}
+      {!isEmpty.coords && <AlertError message="Por favor, añade una ubicación." />}
 
-      {customAlert && <span style={{ margin: ".5rem 0", display: "block" }}>{customAlert}</span>}
-      {children}
+      {customAlert}
       {petToEdit.id && (
-        <MainButton
-          backgroundColor={"var(--Rubber-Ducky-Yellow)"}
-          margin={"1.5rem 0"}
-          onClick={changeStateOfPet}
-        >
+        <MainButton backgroundColor={"var(--Rubber-Ducky-Yellow)"} onClick={changeStateOfPet}>
           {`Reportar como ${pet.state == "lost" ? "encontrado" : "perdido"}`}
         </MainButton>
       )}
+      {children}
     </form>
   );
 }

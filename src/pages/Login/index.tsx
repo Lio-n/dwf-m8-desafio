@@ -23,11 +23,11 @@ export function Login() {
 
     if (!!email && validateEmail(email)) {
       setCustomAlert(<AlertWait message="Por favor, espere..." />);
+      setEmail(email);
 
       !isEmpty && setEmpty(true);
       const exists = await checkUser({ email });
 
-      setEmail(email);
       exists ? navegate("password") : navegate("/mis-datos");
     } else {
       setEmpty(false);
@@ -36,7 +36,7 @@ export function Login() {
 
   return (
     <CardLayer type="log">
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1.25rem" }}>
         <MainTextField
           name="email"
           title="Email"

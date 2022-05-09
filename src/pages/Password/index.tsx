@@ -35,7 +35,7 @@ export function Password() {
 
   return (
     <CardLayer type="log">
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1.25rem" }}>
         <PasswordTextField
           type={type}
           name="password"

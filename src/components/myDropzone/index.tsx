@@ -11,7 +11,7 @@ export function MyDropzone({ style, onChange }: { style?; onChange: (any) => any
 
   useEffect(() => {
     setImgURL(pictureUrl);
-  }, []);
+  }, [pictureUrl]);
 
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the files

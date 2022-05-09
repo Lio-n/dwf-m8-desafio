@@ -37,7 +37,7 @@
 }
 
 .list__item:hover {
-  background-color: #f3f3f3;
+  background-color: var(--Aqua-Haze);
 }
 
 .root__info {

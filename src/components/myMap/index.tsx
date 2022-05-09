@@ -1,5 +1,5 @@
-import { useGetCurrentCoords } from "hooks";
 import React, { useEffect, useState } from "react";
+import { useGetCurrentCoords } from "hooks";
 import Map from "react-map-gl";
 
 const TOKEN =

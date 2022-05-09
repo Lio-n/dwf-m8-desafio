@@ -11,7 +11,7 @@ type MainButtonProps = {
 
 export default function MainButton({
   children,
-  margin = "0",
+  margin,
   backgroundColor = "var(--Muted-Blue)",
   onClick,
 }: MainButtonProps) {

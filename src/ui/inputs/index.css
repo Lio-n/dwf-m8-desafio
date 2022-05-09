@@ -11,7 +11,7 @@
 }
 
 .main__input:focus {
-  border-color: #094f6e;
+  border-color: var(----Dark-Cerulean);
   box-shadow: inset 0 0 3px rgb(0 0 0 / 40%);
 }
 
