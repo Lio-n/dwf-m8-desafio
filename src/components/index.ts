@@ -8,9 +8,21 @@ import MyPet from "./myPet";
 import FormPet from "./formPet";
 import ShowPets from "./showPets";
 import MainTextField, { PasswordTextField } from "./textField";
-import FormReportSighting from "./formReportSighting";
+import FormReportSighting from "./FormReportSighting";
+import EditReportForm from "./EditReportForm";
+import LoginFrom from "./LoginForm";
+import MyDataForm from "./MyDataForm";
+import ShowMyPets from "./ShowMyPets";
+import PasswordForm from "./PasswordForm";
+import PetReportForm from "./PetReportForm";
 
 export {
+  PetReportForm,
+  PasswordForm,
+  ShowMyPets,
+  MyDataForm,
+  LoginFrom,
+  EditReportForm,
   MyDropzone,
   MyHeader,
   MyMenu,

@@ -15,7 +15,7 @@ export default function Home() {
   };
 
   return (
-    <div className={css.root}>
+    <div>
       <div className={css.root__location}>
         <TextTitle margin="0 0 1.5rem">
           Solo puedes reportar mascotas cerca de tu ubicación

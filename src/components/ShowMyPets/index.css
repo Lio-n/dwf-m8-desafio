@@ -1,6 +1,3 @@
-.root {
-  display: flow-root;
-}
 .list {
   display: flex;
   flex-wrap: wrap;
