@@ -1,13 +1,13 @@
-import { CardLayer } from "./cardLayer";
+import CardLayer from "./cardLayer";
 import MainButton from "./buttons";
 import Icon, { IconEye } from "./icons";
-import { Logo } from "./logo";
+import Logo from "./logo";
 import MainInput, { RadioInput } from "./inputs";
 import { AlertError, AlertWait } from "./alerts";
 import { TextTitle, TextSubTitle, TextSpan } from "./text";
-import { CustomMarker } from "./marker";
-import { CustomPopup } from "./popup";
-import { PopupLayer } from "./popupLayer";
+import CustomMarker from "./marker";
+import CustomPopup from "./popup";
+import PopupLayer from "./popupLayer";
 import MenuItem, { SignoutItem } from "./menuItem";
 
 export {

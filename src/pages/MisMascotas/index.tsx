@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { MyPet } from "components";
 import { useGetToken, useSetPet } from "hooks";
 import { getOnePet, getPets } from "lib/apis";
-import { TextSubTitle, TextTitle } from "ui";
+import { TextTitle } from "ui";
 import css from "./index.css";
 
-function MisMascotas() {
+export default function MisMascotas() {
   const token = useGetToken();
   const navegate = useNavigate();
   const usePet = useSetPet();
@@ -15,19 +15,6 @@ function MisMascotas() {
   useEffect(() => {
     if (!token) navegate("/");
     getUserPets();
-    // Seteo los valores de Pet a Default 'usePet'
-    usePet({
-      full_name: undefined,
-      pictureUrl: undefined,
-      breed: undefined,
-      color: undefined,
-      sex: undefined,
-      date_last_seen: undefined,
-      last_location_lat: undefined,
-      last_location_lng: undefined,
-      id: undefined,
-      state: undefined,
-    });
   }, []);
 
   const getUserPets = async () => {
@@ -63,5 +50,3 @@ function MisMascotas() {
     </section>
   );
 }
-
-export { MisMascotas };

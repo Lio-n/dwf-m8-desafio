@@ -6,7 +6,7 @@ import { FormPet } from "components";
 import { AlertWait, CardLayer, MainButton, TextTitle } from "ui";
 import css from "./index.css";
 
-export function EditarReporte() {
+export default function EditarReporte() {
   const navegate = useNavigate();
   const [customAlert, setCustomAlert] = useState(undefined);
   const token = useGetToken();

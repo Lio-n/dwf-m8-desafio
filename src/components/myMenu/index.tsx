@@ -26,7 +26,7 @@ function Default() {
   );
 }
 
-export function MyMenu() {
+export default function MyMenu() {
   const token = useGetToken();
   const { full_name } = useGetUser();
   return (

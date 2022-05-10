@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { AlertError, AlertWait, MainButton, TextSpan } from "ui";
 import { MainTextField } from "components";
 import { sendReport } from "lib/apis";
@@ -11,7 +11,7 @@ const checkInputs = (report_data: ReportSighting): boolean => {
   return;
 };
 
-const validatePhoneNumber = (input_str) => {
+const validatePhoneNumber = (input_str: string): boolean => {
   const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
   return re.test(input_str);
@@ -23,7 +23,11 @@ type FormReportSightingProps = {
   pet_name: string;
 };
 
-export function FormReportSighting({ pet_id, published_by, pet_name }: FormReportSightingProps) {
+export default function FormReportSighting({
+  pet_id,
+  published_by,
+  pet_name,
+}: FormReportSightingProps) {
   const [isEmpty, setEmpty] = useState({
     full_name: true,
     message: true,
@@ -44,10 +48,10 @@ export function FormReportSighting({ pet_id, published_by, pet_name }: FormRepor
     currentData();
   }, [submit]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
     setCustomAlert(<AlertWait message="Enviando reporte..." />);
-    const formData: any = new FormData(e.target);
+    const formData: any = new FormData(e.target as HTMLFormElement);
     const dataObject = Object.fromEntries(formData);
 
     setReport({ ...report, ...dataObject });
@@ -59,7 +63,7 @@ export function FormReportSighting({ pet_id, published_by, pet_name }: FormRepor
     setSubmit(!submit);
   };
 
-  const currentData = async () => {
+  const currentData = async (): Promise<void> => {
     if (checkInputs(report) && isEmpty.phone_number) {
       await sendReport(report);
       setCustomAlert(<AlertSuccess message="¡Reportado con Exito!" />);
@@ -69,10 +73,7 @@ export function FormReportSighting({ pet_id, published_by, pet_name }: FormRepor
   };
 
   return (
-    <form
-      style={{ marginTop: "0.5rem", display: "grid", gap: "1.25rem" }}
-      onSubmit={(event) => handleSubmit(event)}
-    >
+    <form style={{ marginTop: "0.5rem", display: "grid", gap: "1.25rem" }} onSubmit={handleSubmit}>
       <MainTextField
         name="full_name"
         title="Tu Nombre"

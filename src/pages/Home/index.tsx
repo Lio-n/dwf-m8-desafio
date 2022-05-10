@@ -1,10 +1,10 @@
 import React from "react";
-import { CustomMap, ShowPets } from "components";
-import { useGetUser, useSetCurrentCoords } from "hooks";
+import { ShowPets } from "components";
+import { useSetCurrentCoords } from "hooks";
 import { MainButton, TextTitle } from "ui";
 import css from "./index.css";
 
-export function Home() {
+export default function Home() {
   const setCurrCoords = useSetCurrentCoords();
 
   const handleCurrentCoords = () => {

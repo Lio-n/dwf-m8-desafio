@@ -4,8 +4,8 @@ import { useDropzone } from "react-dropzone";
 import { Icon } from "ui";
 import css from "./index.css";
 
-// * Este componente se encarga de guardar la URL de la img en el atom pets.
-export function MyDropzone({ style, onChange }: { style?; onChange: (any) => any }) {
+// * Este componente se encarga de guardar la URL [base64] de la img en el atom pets.
+export default function MyDropzone({ style, onChange }: { style?; onChange: (any) => any }) {
   const [imgURL, setImgURL] = useState(null);
   const { pictureUrl } = useGetPet();
 

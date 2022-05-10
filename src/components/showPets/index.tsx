@@ -5,7 +5,7 @@ import { getAllPets, getPetsNearby } from "lib/apis";
 import { CustomMarker, PopupLayer } from "ui";
 import css from "./index.css";
 
-export function ShowPets() {
+export default function ShowPets() {
   const currCoords = useGetCurrentCoords();
   const [pets, setPets] = useState(undefined);
   const [popupInfo, setPopupInfo] = useState(null);

@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { MyHeader } from "components";
 
-export function Layout() {
+export default function Layout() {
   return (
     <>
       <MyHeader />

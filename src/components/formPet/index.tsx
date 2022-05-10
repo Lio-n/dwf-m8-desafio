@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetToken } from "hooks";
 import { MainTextField, MyDropzone, Mapbox } from "components";
@@ -31,7 +31,7 @@ const defaultPet = {
   state: undefined,
 };
 
-export function FormPet({ children, addAlert, petToEdit = defaultPet }: FormPetProps) {
+export default function FormPet({ children, addAlert, petToEdit = defaultPet }: FormPetProps) {
   const [customAlert, setCustomAlert] = useState(undefined);
 
   const [pet, setPet] = useState({
@@ -63,7 +63,7 @@ export function FormPet({ children, addAlert, petToEdit = defaultPet }: FormPetP
     currentData();
   }, [submit]);
 
-  const currentData = async () => {
+  const currentData = async (): Promise<void> => {
     if (checkInputs(pet)) {
       if (petToEdit.id) {
         // $ Edit Pet
@@ -77,10 +77,10 @@ export function FormPet({ children, addAlert, petToEdit = defaultPet }: FormPetP
     setCustomAlert(undefined);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setCustomAlert(addAlert);
-    const formData: any = new FormData(e.target);
+    const formData: any = new FormData(e.target as HTMLFormElement);
     const dataObject = Object.fromEntries(formData);
 
     setPet({ ...pet, ...dataObject });
@@ -95,20 +95,23 @@ export function FormPet({ children, addAlert, petToEdit = defaultPet }: FormPetP
     setSubmit(!submit);
   };
 
-  const handleMapboxChange = ({ coords }) =>
+  const handleMapboxChange = ({ coords }: { coords: [number, number] }): void =>
     setPet({ ...pet, last_location_lng: coords[0], last_location_lat: coords[1] });
-  const handleDropzoneChange = ({ pictureUrl }) => setPet({ ...pet, pictureUrl });
+  const handleDropzoneChange = ({ pictureUrl }: { pictureUrl: string }): void =>
+    setPet({ ...pet, pictureUrl });
 
-  const checkTypeSex = (sex) => {
+  const checkTypeSex = (sex: string): boolean => {
     if ((sex !== "female" && sex !== "male") || sex === "female") return true;
     return;
   };
 
-  const setDateOfPet = () => new Date(petToEdit.date_last_seen).toISOString().substring(0, 10);
-  const changeStateOfPet = () => setPet({ ...pet, state: pet.state == "lost" ? "found" : "lost" });
+  const setDateOfPet = (): string =>
+    new Date(petToEdit.date_last_seen).toISOString().substring(0, 10);
+  const changeStateOfPet = (): void =>
+    setPet({ ...pet, state: pet.state == "lost" ? "found" : "lost" });
 
   return (
-    <form onSubmit={(event) => handleSubmit(event)} style={{ display: "grid", gap: "1.25rem" }}>
+    <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1.25rem" }}>
       <MainTextField
         name="full_name"
         title="Nombre"

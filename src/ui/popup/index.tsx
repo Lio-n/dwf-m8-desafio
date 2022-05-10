@@ -7,7 +7,7 @@ type CustomPopupProps = {
   children;
 };
 
-export function CustomPopup({ coords, closePopup, children }: CustomPopupProps) {
+export default function CustomPopup({ coords, closePopup, children }: CustomPopupProps) {
   return (
     <Popup latitude={coords[0]} longitude={coords[1]} onClose={() => closePopup(null)} offset={25}>
       {children}

@@ -11,7 +11,7 @@ type CustomMap = {
   height?: string | number;
 };
 
-export function CustomMap({ children, coords, height = "22rem" }: CustomMap) {
+export default function CustomMap({ children, coords, height = "22rem" }: CustomMap) {
   const [mapRef, setMapRef] = useState(null);
   const currCoords = useGetCurrentCoords();
 
@@ -27,9 +27,9 @@ export function CustomMap({ children, coords, height = "22rem" }: CustomMap) {
     <Map
       ref={(e) => setMapRef(e)}
       initialViewState={{
-        latitude: 0,
-        longitude: 0,
-        zoom: 3.5,
+        latitude: 48.399989097932604,
+        longitude: -4.486109177517903,
+        zoom: 10,
         bearing: 0,
         pitch: 0,
       }}

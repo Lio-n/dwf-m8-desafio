@@ -4,12 +4,12 @@ import { FormPet } from "components";
 import { AlertWait, CardLayer, MainButton, TextTitle } from "ui";
 import { useSetPet } from "hooks";
 
-function ReportarMascota() {
+export default function ReportarMascota() {
   const navegate = useNavigate();
-  const setPet = useSetPet();
+  const usePet = useSetPet();
 
   useEffect(() => {
-    setPet({
+    usePet({
       full_name: undefined,
       pictureUrl: undefined,
       breed: undefined,
@@ -37,5 +37,3 @@ function ReportarMascota() {
     </section>
   );
 }
-
-export { ReportarMascota };

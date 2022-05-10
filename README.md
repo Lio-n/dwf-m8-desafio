@@ -20,14 +20,6 @@
       </Route>
     </Routes>
 
-## Falta
-
-### Añadir
-
-- Guardar info en el localstorage, Que info voy a guardar?
-
-- Darle funcionalidad al botton 'Cerrar Sesion'
-
 # Useful resources
 
 https://mariestarck.com/how-to-display-popups-on-a-mapbox-map-mapbox-react-tutorial-part-3/

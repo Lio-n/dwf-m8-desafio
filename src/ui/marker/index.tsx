@@ -8,7 +8,7 @@ type CustomMarkerProps = {
   children;
 };
 
-export function CustomMarker({ index, pet, setPopupInfo, children }: CustomMarkerProps) {
+export default function CustomMarker({ index, pet, setPopupInfo, children }: CustomMarkerProps) {
   return (
     <Marker
       key={index}

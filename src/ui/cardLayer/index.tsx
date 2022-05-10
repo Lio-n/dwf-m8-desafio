@@ -6,7 +6,7 @@ type CardLayerProps = {
   type?: "log" | "default";
 };
 
-export function CardLayer({ children, type = "default" }: CardLayerProps) {
+export default function CardLayer({ children, type = "default" }: CardLayerProps) {
   const style: CSSProperties =
     type == "default" ? { padding: "1rem" } : { padding: "1.25rem 1.8rem", width: "22rem" };
 

@@ -1,5 +1,5 @@
-import { useSetUser } from "hooks";
 import React from "react";
+import { useSetUser } from "hooks";
 import { Link } from "react-router-dom";
 import { Icon } from "ui";
 import css from "./index.css";

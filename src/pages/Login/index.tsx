@@ -5,7 +5,7 @@ import { AlertWait, CardLayer, MainButton } from "ui";
 import { checkUser } from "lib/apis";
 import { MainTextField } from "components";
 
-export function Login() {
+export default function Login() {
   const navegate = useNavigate();
   const setEmail = useSetEmail();
   const [isEmpty, setEmpty] = useState(true);

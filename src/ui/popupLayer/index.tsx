@@ -9,7 +9,7 @@ type PopupLayerProps = {
   children?;
 };
 
-export function PopupLayer({ pet, onClick, type = "default", children }: PopupLayerProps) {
+export default function PopupLayer({ pet, onClick, type = "default", children }: PopupLayerProps) {
   const date = new Date(pet.date_last_seen).toISOString().substring(0, 10);
 
   return (

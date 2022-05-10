@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const paw_favicon = require("assets/paw_favicon.svg");
 
-export function Logo() {
+export default function Logo() {
   return (
     <Link to="/" style={{ display: "contents" }}>
       <img

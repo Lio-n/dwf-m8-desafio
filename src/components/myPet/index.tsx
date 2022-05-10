@@ -9,7 +9,7 @@ type MyPetProps = {
   onChange: (id: number) => any;
 };
 
-export function MyPet({ full_name, id, pictureUrl, onChange }: MyPetProps) {
+export default function MyPet({ full_name, id, pictureUrl, onChange }: MyPetProps) {
   return (
     <div className={css.card}>
       <div className={css.pet}>

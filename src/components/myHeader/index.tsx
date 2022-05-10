@@ -3,7 +3,7 @@ import css from "./index.css";
 import { MyMenu } from "components";
 import { Logo } from "ui";
 
-export function MyHeader() {
+export default function MyHeader() {
   return (
     <header className={css.header}>
       <Logo />

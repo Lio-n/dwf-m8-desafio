@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "hooks";
 import { authUser } from "lib/apis";
-
 import { AlertError, AlertWait, CardLayer, MainButton } from "ui";
 import { PasswordTextField } from "components";
 
-export function Password() {
+export default function Password() {
   const navegate = useNavigate();
   const [user, setUser] = useUser();
   const [isEmpty, setEmpty] = useState(true);

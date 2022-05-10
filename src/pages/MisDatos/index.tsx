@@ -6,7 +6,7 @@ import { authUser, createUser, updateUser } from "lib/apis";
 import { AlertError, AlertSuccess } from "ui/alerts";
 import { useNavigate } from "react-router-dom";
 
-export function MisDatos() {
+export default function MisDatos() {
   const navegate = useNavigate();
   const [user, setUser] = useUser();
   const [type, setType] = useState("password");

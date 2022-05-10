@@ -10,7 +10,7 @@ import { TextSpan } from "ui";
 import css from "./index.css";
 
 type MapBoxSearchProps = {
-  coords;
+  coords: number[];
   onChange: (any) => any;
 };
 
@@ -26,23 +26,23 @@ const CustomMarker = ({ coords, onChange }: MapBoxSearchProps) => {
   );
 };
 
-export function Mapbox({ onChange }: { onChange: (any) => any }) {
+export default function Mapbox({ onChange }: { onChange: (any) => any }) {
   const [marker, setMarker] = useState(null);
   const [query, setQuery] = useState("");
   const [result, setResult] = useState(null);
   const { last_location_lat, last_location_lng } = useGetPet(); // * 1
 
   // lo seteo any porque la prop "center" de Map se queja
-  const initialCoords: any = [-4.486109177517903, 48.399989097932604];
-  const petCoords: any = [last_location_lng, last_location_lat]; // * 2
-  const [coords, setCoords] = useState(petCoords || initialCoords);
+  const initialCoords: any = [48.399989097932604, -4.486109177517903];
+  const petCoords: any = [last_location_lat, last_location_lng]; // * 2
+  const [coords, setCoords] = useState(!petCoords.includes(undefined) ? petCoords : initialCoords);
 
   useEffect(() => {
     if (last_location_lat) setMarker(<CustomMarker coords={petCoords} onChange={onChange} />); // * 3
     if (!last_location_lat && marker) setMarker(null);
   }, [last_location_lat]);
 
-  const search = async () => {
+  const search = async (): Promise<void> => {
     if (!query) return;
     const data: any[] = await searchQuery(query);
     if (!data) return;
@@ -57,10 +57,10 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
     if (query.length > 3) search();
   }, [query]);
 
-  const inputChangeHandler = (e) => setQuery(e.target.value);
-  const keydownInputHandler = (e) => e.key == "Enter" && search();
+  const inputChangeHandler = (e): void => setQuery(e.target.value);
+  const keydownInputHandler = (e): Promise<void> => e.key == "Enter" && search();
 
-  const resultHandler = (item) => {
+  const resultHandler = (item): void => {
     setMarker(null); // * 4
     onChange({ coords: item.newCoords });
 
@@ -90,6 +90,7 @@ export function Mapbox({ onChange }: { onChange: (any) => any }) {
       </div>
     );
   };
+
   return (
     <section className={css.root}>
       <div className={css.search}>
