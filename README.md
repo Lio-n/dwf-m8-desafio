@@ -18,7 +18,7 @@
 
 ### The challenge
 
-- Take your **[web](https://github.com/Lio-n/dwf-m8-desafio)** frontend to the next level. Use React and Typescript to build _[this webapp](https://dwf-m8-2406.web.app/)_ and orient the architecture to layers. Use GitHub shares to build our frontend and deploy it on Firebase Hosting.
+- Take your **[web](https://github.com/Lio-n/dwf-m7-desafio)** frontend to the next level. Use React and Typescript to build _[this webapp](https://dwf-m8-2406.web.app/)_ and orient the architecture to layers. Use GitHub shares to build our frontend and deploy it on Firebase Hosting.
 
 ## My process
 
