@@ -1,6 +1,5 @@
 import { MyHeader } from "./myHeader";
 import { MyMenu } from "./myMenu";
-import { MenuItem } from "./menuItem";
 import { Layout } from "./Layout";
 import { MyDropzone } from "./myDropzone";
 import { CustomMap } from "./myMap";
@@ -15,7 +14,6 @@ export {
   MyDropzone,
   MyHeader,
   MyMenu,
-  MenuItem,
   Layout,
   CustomMap,
   Mapbox,

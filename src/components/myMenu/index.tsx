@@ -1,7 +1,6 @@
 import React from "react";
-import { MenuItem } from "components";
 import { useGetToken, useGetUser } from "hooks";
-import { Icon } from "ui";
+import { Icon, MenuItem, SignoutItem } from "ui";
 import css from "./index.css";
 
 // # En base al (TOKEN ? isLogged = true : isLogged = false)
@@ -13,7 +12,7 @@ function UserLogged() {
       <MenuItem name="Mis datos" />
       <MenuItem name="Mis mascotas" />
       <MenuItem name="Reportar mascota" />
-      <MenuItem name="Cerrar Sesion" />
+      <SignoutItem />
     </>
   );
 }

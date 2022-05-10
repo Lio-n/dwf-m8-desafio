@@ -8,6 +8,7 @@ import { TextTitle, TextSubTitle, TextSpan } from "./text";
 import { CustomMarker } from "./marker";
 import { CustomPopup } from "./popup";
 import { PopupLayer } from "./popupLayer";
+import MenuItem, { SignoutItem } from "./menuItem";
 
 export {
   MainInput,
@@ -25,4 +26,6 @@ export {
   CustomMarker,
   CustomPopup,
   PopupLayer,
+  MenuItem,
+  SignoutItem,
 };

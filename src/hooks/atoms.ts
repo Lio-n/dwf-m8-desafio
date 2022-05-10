@@ -1,8 +1,15 @@
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist({
+  key: "user_localData", // this key is using to store data in local storage
+  storage: localStorage, // configurate which stroage will be used to store the data
+});
 
 export const userState = atom({
   key: "user",
   default: { email: undefined, full_name: undefined, token: undefined },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const tokenSelector = selector({
@@ -84,21 +91,3 @@ export const currentCoordsSelector = selector({
     });
   },
 });
-
-/* export const getTokenSelector = selectorFamily({
-  key: "getTokenSelector",
-  get:
-    (password: string) =>
-    async ({ get }) => {
-      if (!!password) {
-        const [user, setUser] = useUser();
-
-        const { token, full_name } = await getTokenAPI({ email: user.email, password });
-
-        setUser({ email: user.email, token, full_name });
-        return true;
-      }
-      return;
-    },
-});
- */
