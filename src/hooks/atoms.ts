@@ -84,7 +84,7 @@ export const currentCoordsSelector = selector({
   get: ({ get }) => {
     return get(currentCoords);
   },
-  set: ({ set, get }, newCoords: { lng: number; lat: number }) => {
+  set: ({ set, get }, newCoords: { lng: number | undefined; lat: number | undefined }) => {
     set(currentCoords, {
       ...get(currentCoords),
       ...newCoords,

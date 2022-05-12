@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { CustomMap, FormReportSighting } from "components";
-import { useGetCurrentCoords } from "hooks";
+import { useCurrentCoords } from "hooks";
 import { getAllPets, getPetsNearby } from "lib/apis";
-import { CustomMarker, PopupLayer } from "ui";
+import { CardLayer, CustomMarker, PopupLayer, TextSubTitle } from "ui";
 import css from "./index.css";
 
+const arrayIsEmpty = (array) => {
+  if (Array.isArray(array) && array.length == 0) return true;
+  return;
+};
+
 export default function ShowPets() {
-  const currCoords = useGetCurrentCoords();
+  const [currCoords, setCurrCoords] = useCurrentCoords();
   const [pets, setPets] = useState(undefined);
   const [popupInfo, setPopupInfo] = useState(null);
   const [enableForm, setEnableForm] = useState(false);
@@ -39,10 +44,26 @@ export default function ShowPets() {
 
   useEffect(() => {
     getPets();
+    return () => {
+      setCurrCoords({ lat: undefined, lng: undefined });
+    };
   }, []);
 
   return (
     <div className={css.root}>
+      {pets !== undefined && arrayIsEmpty(pets?.resPets) && (
+        <>
+          <div className={css.layer__background}></div>
+          <div className={css.layer}>
+            <CardLayer>
+              <div className={css.layer__close_btn} onClick={() => setPets(undefined)}></div>
+              <TextSubTitle margin="0">
+                No hay mascotas reportadas cerca de tu ubicación
+              </TextSubTitle>
+            </CardLayer>
+          </div>
+        </>
+      )}
       <CustomMap height={"88vh"}>
         {pets && renderPetsMarker()}
         {!pets?.areNearby && popupInfo && <PopupLayer pet={popupInfo} onClick={setPopupInfo} />}

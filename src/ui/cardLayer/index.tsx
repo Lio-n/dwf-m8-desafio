@@ -11,7 +11,7 @@ export default function CardLayer({ children, type = "default" }: CardLayerProps
     type == "default" ? { padding: "1rem" } : { padding: "1.25rem 1.8rem", width: "22rem" };
 
   return (
-    <div className={css.root} style={style}>
+    <div className={css.root} style={{ ...style, position: "relative" }}>
       {children}
     </div>
   );
