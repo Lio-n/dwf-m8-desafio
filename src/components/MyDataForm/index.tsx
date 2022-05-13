@@ -62,6 +62,7 @@ export default function MyDataForm() {
         name="full_name"
         title="Usuario"
         placeholder="Usuario"
+        defaultValue={user.full_name || ""}
         isEmpty={isEmpty.full_name}
       />
       <MainTextField
