@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://dwf-m7-looking-for-my-friend.herokuapp.com
