@@ -41,7 +41,7 @@ export default function Icon({ type, width = "1.5rem", height = "1.5rem" }: Icon
     update_icon,
   };
 
-  return <img style={{ height, width }} src={arrIcons[type]} />;
+  return <img style={{ height, width }} src={arrIcons[type]} alt={type} />;
 }
 
 type IconEyeProps = {
@@ -60,5 +60,5 @@ export function IconEye({ type = true, onEvent }: IconEyeProps) {
     height: "auto",
     width: "2rem",
   };
-  return <img style={style} src={type ? eye_open : eye_closed} onClick={onEvent} />;
+  return <img style={style} src={type ? eye_open : eye_closed} onClick={onEvent} alt="eye_icon" />;
 }

@@ -30,7 +30,11 @@ export default function ShowPets() {
       <div key={index}>
         <CustomMarker index={index} pet={item} setPopupInfo={setPopupInfo}>
           <div className={css.pet__marker}>
-            <img className={css.pet__picture} src={item.pictureUrl} />
+            <img
+              className={css.pet__picture}
+              src={item.pictureUrl}
+              alt={`${item.full_name} picture`}
+            />
           </div>
         </CustomMarker>
       </div>
