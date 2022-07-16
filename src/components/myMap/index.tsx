@@ -40,7 +40,7 @@ export default function CustomMap({ children, coords, height = "22rem" }: Custom
         maxWidth: "90vw",
         borderRadius: 4,
       }}
-      mapStyle="mapbox://styles/mapbox/outdoors-v11?optimize=true"
+      mapStyle="mapbox://styles/mapbox/streets-v11?optimize=true"
       mapboxAccessToken={TOKEN}
     >
       {children}
